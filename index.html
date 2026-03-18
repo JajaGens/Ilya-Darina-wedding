@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#ecb613",
+                "background-light": "#f8f8f6",
+                "background-dark": "#221d10",
+              },
+              fontFamily: {
+                "display": ["Newsreader", "serif"],
+                "sans": ["Inter", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-display { font-family: 'Newsreader', serif; }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.72) 100%);
+        }
+        .hero-bottom-fade {
+            background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 45%, transparent 100%);
+            pointer-events: none;
+        }
+        #countdown-label {
+            font-size: 18px;
+            background: linear-gradient(180deg, #ecb613 0%, #a67c0a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        #countdown-label.countdown-done {
+            background: none;
+            -webkit-text-fill-color: currentColor;
+            color: #ecb613;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased selection:bg-primary/30">
+<main>
+<section class="relative h-[584px] w-full flex flex-col items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover grayscale-[20%] contrast-[1.1]" data-alt="Atmospheric wide shot of couple in Tuscany sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH7IlGsPfG8RuL3CykvPxb9RLHFx70TzTi42XpeoKwP_2Mz2nUr131bTUqB_YzFaENJJZZRBN0FAk_1snplBqiUozOFY931DH98qpBTuD_nvFXHFsLs12tbKEf6XXTviWcRO-pRfJv5ohWlIzGgkl3hh9HgnZdh-Wdzzd7-0RI6ApzKmW4h7nUrnM_3Iz6Xv0nywpQsbudgvTroiB3zUI72U862ddWh0hRZnKCk7TlZ2P4XYRmr0ewLt3gmK1DP46wYK17sEf37Hk"/>
+<div class="absolute inset-0 hero-gradient"></div>
+<div class="absolute inset-x-0 bottom-0 h-[45%] hero-bottom-fade z-[1]"></div>
+</div>
+<div class="relative z-10 text-center text-white px-4">
+<p class="uppercase tracking-[0.4em] text-sm mb-6 opacity-90 font-light">Приглашаем вас отпраздновать вместе с нами</p>
+<h1 class="font-display italic text-6xl md:text-9xl font-extralight mb-4 tracking-tight leading-none">
+                Илья <span class="text-4xl md:text-6xl align-middle mx-4 not-italic font-sans">&amp;</span> Дарина
+            </h1>
+<div class="flex flex-col md:flex-row items-center justify-center gap-4 mt-12">
+<span class="uppercase tracking-[0.3em] text-xs">14 июля 2026</span>
+<span class="hidden md:block w-8 h-[1px] bg-white/50"></span>
+<span class="uppercase tracking-[0.3em] text-xs">Санкт-Петербург и Петергоф</span>
+</div>
+</div>
+<div class="absolute bottom-8 md:bottom-12 left-0 right-0 z-20 flex justify-center px-4 pointer-events-none">
+<button type="button" class="pointer-events-auto animate-bounce opacity-80 hover:opacity-100 cursor-pointer text-white transition-opacity focus:outline-none focus:ring-2 focus:ring-white/40 rounded-full p-2 shrink-0" aria-label="К таймеру" onclick="document.getElementById('countdown').scrollIntoView({ behavior: 'smooth', block: 'start' })">
+<span class="material-symbols-outlined text-3xl font-extralight pointer-events-none">expand_more</span>
+</button>
+</div>
+</section>
+<!-- Countdown Timer -->
+<section class="py-20 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800" id="countdown">
+<div class="max-w-4xl mx-auto px-6 text-center">
+<p class="uppercase tracking-[0.3em] font-bold mb-10 text-primary dark:text-primary" id="countdown-label">До торжества осталось</p>
+<div class="grid grid-cols-4 gap-4 md:gap-12">
+<div class="flex flex-col">
+<span class="font-display text-4xl md:text-7xl font-extralight text-slate-800 dark:text-slate-100" id="countdown-days">—</span>
+<span class="uppercase tracking-[0.2em] text-[10px] text-slate-400 mt-2">Дней</span>
+</div>
+<div class="flex flex-col">
+<span class="font-display text-4xl md:text-7xl font-extralight text-slate-800 dark:text-slate-100" id="countdown-hours">—</span>
+<span class="uppercase tracking-[0.2em] text-[10px] text-slate-400 mt-2">Часов</span>
+</div>
+<div class="flex flex-col">
+<span class="font-display text-4xl md:text-7xl font-extralight text-slate-800 dark:text-slate-100" id="countdown-minutes">—</span>
+<span class="uppercase tracking-[0.2em] text-[10px] text-slate-400 mt-2">Минут</span>
+</div>
+<div class="flex flex-col">
+<span class="font-display text-4xl md:text-7xl font-extralight text-slate-800 dark:text-slate-100" id="countdown-seconds">—</span>
+<span class="uppercase tracking-[0.2em] text-[10px] text-slate-400 mt-2">Секунд</span>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-6 md:px-24 bg-background-light dark:bg-background-dark" id="story">
+<div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+<div class="md:col-span-5 relative">
+<div class="aspect-[3/4] overflow-hidden rounded-lg shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Close up of couple laughing in Paris cafe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG_XdCGnCXU__zDTUSx3NlV0yo1RmhkMpx7k4Wa7V1yqKbWI6uB9VlL0B-BQuv9Hnsh1grodVenYu0584mGI7FqVKx6XcSkub9QRtFtJ7R96BHjG7l2pKPQ77DE5drRGzFAyrCyMTBY4CjjSbhKSDcPZChrw8YTkUiV5USMXhpT4thcNSSECJ4zeP4d6OX0nSKh_5y1zD86SnRSN-gre3WzUEkBCPe3n5Rb0AIHACX7n6KyfBIGOlB3aPD328YWE0DD0ITcT3vM4k"/>
+</div>
+<div class="absolute -bottom-8 -right-8 w-48 h-64 hidden lg:block rounded-lg overflow-hidden border-8 border-background-light dark:border-background-dark shadow-xl">
+<img class="w-full h-full object-cover" data-alt="Black and white portrait of the couple" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyVQDs_GWvBWz_KMR0h6w46REkqizKesfXtJqYacsxgNh8GEOAFHPpTkLpwu4W6IYmVIPHBBUVS2IhWBr-6I78ivwnJyzgO0ptr_w6YTJ7bo4yCM7d9NJmOqwbSgUEreR8OJSWg3QHFgUdzgn2T7ziQgZgAecglL2n4KaZpJQECzFh-0XxcKvhu5djG-t74OeMqkkz5MOmf2ys3ocTLVkAYj2vwr5UV6wbbnRVitKK3VTiiT4nnk-fO21usgIRDGI8nsBFyQ44gtU"/>
+</div>
+</div>
+<div class="md:col-span-7 md:pl-12">
+<span class="text-primary uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Начало истории</span>
+<h2 class="font-display text-5xl md:text-6xl mb-8 leading-tight italic">Ваш текст</h2>
+<div class="space-y-6 text-slate-600 dark:text-slate-400 font-light leading-relaxed text-lg">
+<p>Мы познакомились в Петербурге — среди набережных, мостов и белых ночей. Город стал фоном нашей истории: прогулки по центру, кофе в любимых местах, долгие разговоры.</p>
+<p>Теперь хотим отметить этот день там же, рядом с вами — от росписи у Невы до вечера в Петергофе. Спасибо, что вы с нами.</p>
+<p class="font-display italic text-2xl text-slate-900 dark:text-slate-100 pt-4">«Мы счастливы начать нашу новую главу вместе с вами».</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Dress Code Section -->
+<section class="py-24 bg-white dark:bg-slate-900">
+<div class="max-w-6xl mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+<div>
+<span class="text-primary uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Эстетика</span>
+<h2 class="font-display text-5xl mb-12 italic leading-tight">Дресс-код</h2>
+<div class="space-y-12">
+<div>
+<h3 class="uppercase tracking-[0.2em] text-xs font-bold text-slate-400 mb-6">Для дам</h3>
+<p class="text-slate-600 dark:text-slate-400 font-light text-lg mb-8">Будем признательны, если вы поддержите палитру нашей свадьбы в своих нарядах:</p>
+<div class="flex flex-wrap gap-4">
+<div class="group relative">
+<div class="w-12 h-12 rounded-xl shadow-sm" style="background-color: rgb(92,30,29);"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap text-[8px] uppercase tracking-widest text-slate-400">Deep Wine</div>
+</div>
+<div class="group relative">
+<div class="w-12 h-12 rounded-xl shadow-sm" style="background-color: rgb(136,42,44);"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap text-[8px] uppercase tracking-widest text-slate-400">Crimson</div>
+</div>
+<div class="group relative">
+<div class="w-12 h-12 rounded-xl shadow-sm" style="background-color: rgb(185,121,132);"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap text-[8px] uppercase tracking-widest text-slate-400">Dusty Rose</div>
+</div>
+<div class="group relative">
+<div class="w-12 h-12 rounded-xl shadow-sm border border-slate-100" style="background-color: rgb(233,221,221);"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap text-[8px] uppercase tracking-widest text-slate-400">Mist</div>
+</div>
+<div class="group relative">
+<div class="w-12 h-12 rounded-xl shadow-sm border border-slate-100" style="background-color: rgb(230,219,195);"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap text-[8px] uppercase tracking-widest text-slate-400">Champagne</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="uppercase tracking-[0.2em] text-xs font-bold text-slate-400 mb-4">Для мужчин</h3>
+<p class="text-slate-600 dark:text-slate-400 font-light text-lg">Для мужчин — свободный стиль. Костюм или классические брюки с рубашкой будут отличным выбором.</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="aspect-[4/5] overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover grayscale-[30%]" data-alt="Silk dress fabric texture" src="images/red.webp"/>
+</div>
+<div class="aspect-[4/5] overflow-hidden rounded-lg mt-12">
+<img class="w-full h-full object-cover grayscale-[30%]" data-alt="Classic suit detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCue8BgtHIgacOq4HbXDu-pBkqfvWBBGS8k5ve0VK4uSNO3XmXOSzmuy8N1uHGxqu4mLTFaUBn0a1jitfrol91oijYv3OKdD_x35GYds0AUDihblByKlbDN316IKSoNdk6vZvb2eGU_JmHbyQSo_kxn6uKyqXKP-h0M-tDK9Bohsa1-zKI-e-Xiek2aZh1QiDZwP-irN__hu37R2mFurIypXDbbzUDdcA2wlB4A-hjp5BkcRrmMzvUAGZD2YzJXsWYg8_R7kHwm_-8"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-slate-100 dark:bg-slate-900/30" id="details">
+<div class="max-w-6xl mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+<div class="flex flex-col items-center gap-4">
+<span class="material-symbols-outlined text-primary text-4xl font-extralight">calendar_today</span>
+<h3 class="font-display text-2xl">Дата</h3>
+<p class="uppercase tracking-widest text-sm text-slate-500">Вторник, 14 июл. 2026</p>
+</div>
+<div class="flex flex-col items-center gap-4">
+<span class="material-symbols-outlined text-primary text-4xl font-extralight">schedule</span>
+<h3 class="font-display text-2xl">Время</h3>
+<p class="uppercase tracking-widest text-sm text-slate-500">Роспись в 13:00 — см. программу</p>
+</div>
+<div class="flex flex-col items-center gap-4">
+<span class="material-symbols-outlined text-primary text-4xl font-extralight">location_on</span>
+<h3 class="font-display text-2xl">Место</h3>
+<ul class="uppercase tracking-widest text-sm text-slate-500 max-w-xs">
+  <li>Дворец бракосочетания № 1</li>
+  <li>Петергоф лофт</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-6 md:px-24" id="timeline">
+<div class="max-w-3xl mx-auto">
+<h2 class="font-display text-5xl text-center mb-20 italic">Программа свадебного дня</h2>
+<div class="space-y-16 relative">
+<div class="absolute left-1/2 -translate-x-1/2 h-full w-[1px] bg-primary/20 top-0"></div>
+<div class="relative grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-y-4 md:gap-y-0 group">
+<div class="text-center md:text-right md:pr-12">
+<span class="text-base uppercase tracking-[0.2em] text-primary font-bold">13:00</span>
+<h4 class="font-display text-2xl mt-1">Роспись</h4>
+</div>
+<div class="w-4 h-4 rounded-full bg-primary z-10 justify-self-center shrink-0"></div>
+<div class="text-center md:text-left md:pl-12">
+<p class="text-sm text-slate-500 font-light max-w-xs mx-auto md:mx-0">Дворец бракосочетания № 1, Санкт-Петербург, Английская набережная, 28.</p>
+</div>
+</div>
+<div class="relative grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-y-4 md:gap-y-0 group">
+<div class="text-center md:text-right md:pr-12">
+<p class="text-sm text-slate-500 font-light max-w-xs mx-auto md:mx-0 md:ml-auto">Петергоф лофт, посёлок Троицкая Гора.</p>
+</div>
+<div class="w-4 h-4 rounded-full bg-primary z-10 justify-self-center shrink-0"></div>
+<div class="text-center md:text-left md:pl-12">
+<span class="text-base uppercase tracking-[0.2em] text-primary font-bold">15:00</span>
+<h4 class="font-display text-2xl mt-1">Фуршет</h4>
+</div>
+</div>
+<div class="relative grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-y-4 md:gap-y-0 group">
+<div class="text-center md:text-right md:pr-12">
+<span class="text-base uppercase tracking-[0.2em] text-primary font-bold">16:00</span>
+<h4 class="font-display text-2xl mt-1">Банкет</h4>
+</div>
+<div class="w-4 h-4 rounded-full bg-primary z-10 justify-self-center shrink-0"></div>
+<div class="text-center md:text-left md:pl-12">
+<p class="text-sm text-slate-500 font-light max-w-xs mx-auto md:mx-0">Петергоф лофт — продолжение праздника.</p>
+</div>
+</div>
+<div class="relative grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-y-4 md:gap-y-0 group">
+<div class="text-center md:text-right md:pr-12">
+<p class="text-sm text-slate-500 font-light max-w-xs mx-auto md:mx-0 md:ml-auto">До встречи на празднике.</p>
+</div>
+<div class="w-4 h-4 rounded-full bg-primary z-10 justify-self-center shrink-0"></div>
+<div class="text-center md:text-left md:pl-12">
+<span class="text-base uppercase tracking-[0.2em] text-primary font-bold">22:00</span>
+<h4 class="font-display text-2xl mt-1">Завершение вечера</h4>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24" id="gallery">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
+<div class="aspect-[3/4] overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Beautiful wedding table setting in a garden" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9lRWPAOcNjVHEtppVlsGkmrRGMOcCB8sIxJmdeYORsfMqpiaAg273reTUBmAbGiyLWetRRwylvzM540_iTaler6Jm-LwxJE100_Hiu4IqbTBRuOnGrGN7D6kRJSE2Hs5iaMSU3kA7DNprucvIrkGWr6nK2Lv4idbgILMKPZwDf1Pf3jLvDtBYaHI2pBn9rcKYuCLzjjqUgy_TF-xH_ACiWqhuL2T3w3ug3I3raXbGV74Q3siqptsRG4_-zI6wbOOxTkWTqV8XVRU"/>
+</div>
+<div class="aspect-[3/4] overflow-hidden rounded-lg mt-8 md:mt-16">
+<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Couple walking away through a field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtZBYJHbw_dbE1wngpsHlbLIILbwYDR4ejLLngXVDnmDNksP22eWaP1r1xE3YFnIRGHzuqD_1yBlEh1uskpTpyvCD48ORyHcWclOAbMB7btBLp6-80_jgHgLmKcmaXU8aZDbog7tMcqXkPG1d7IvBEI-HlW9o04FkIy3Vlmv42PXBxrLqk8k5nNG-IJqrOpHWxr45ISuIJlgMQAFcxSJjmKNqgTodoVpcCIwDAgIa--B2-hisGiYZ8S_tlQjMvygyCuDW3KlhHjp0"/>
+</div>
+<div class="aspect-[3/4] overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="A close up of two glasses clinking" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_wZZs-4ZfxDdngMftVuzzMSelm-YuFSD-If0iRe1l18Pfw-VOZAT6NzI5W8Lkzlveu0UTDjq2q6bHvtpGPMv6UwCRfmIs8iYo33IMh6oacFa_FbFYFrqn8CO9uTiAsUhH1hXHfVwj_clasEhNQOwgxjuSHiJ0yGQW3x_FeUWFh8pVBj-88sg2Q9hvrR0IlGHRJbLjIFI8iRa5oFYVjEk4K9Iabx3tdyJG5mC94SD--bEvW0lcBWO-ZL_LD5VTIeJ83PE7OY7yuiU"/>
+</div>
+<div class="aspect-[3/4] overflow-hidden rounded-lg mt-8 md:mt-16">
+<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Dreamy outdoor wedding venue at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwf1p3xV1DrQvF-Kk1h4Muy-KhsTtyZ9ECCf0NI6vsGvAXAsWKWT6BFL_ffx1C9HXEHHJj0eLxPEw4bo2Ks-eNsC6PC7E15Hy-Hn0gY9nBdHeaMLRmm0DwlnlzyKCD5QmBY3UYv5fIBp7oB_s7icltS__OEiGP8_7KgCFPYLLjG5BX2X-ZV8uoWtOy2-F_oSTsAAz2KH2kRFE8ZKu-ccW2Hj6a_OdWkw0UnrbrbRj8m7YG6E-9ZxBGqo0OokRTLtZCclVgUNZ8360"/>
+</div>
+</div>
+</section>
+<section class="py-24 bg-background-light dark:bg-background-dark" id="location">
+<div class="max-w-6xl mx-auto px-6 space-y-12 md:space-y-16">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
+<div class="max-md:order-2">
+<h2 class="font-display text-5xl mb-6 italic">Роспись</h2>
+<p class="text-slate-600 dark:text-slate-400 font-light text-lg mb-4 leading-relaxed">Дворец бракосочетания № 1. Санкт-Петербург, Английская набережная, 28.</p>
+<a class="text-primary text-xs font-bold uppercase tracking-widest underline hover:opacity-80" href="https://yandex.ru/maps/?text=%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3%2C%20%D0%90%D0%BD%D0%B3%D0%BB%D0%B8%D0%B9%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BD%D0%B0%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C%2028" rel="noopener noreferrer" target="_blank">Открыть в Яндекс.Картах</a>
+</div>
+<div class="max-md:order-1 w-full self-start flex flex-col items-center">
+<span class="text-primary uppercase tracking-[0.3em] text-xs font-bold mb-4 block text-center w-full">Локация</span>
+<div class="aspect-[4/3] bg-slate-200 dark:bg-slate-800 rounded-lg overflow-hidden relative shadow-inner w-full">
+<img class="w-full h-full object-cover opacity-80" alt="" src="images/drovec.webp"/>
+<div class="absolute inset-x-0 top-0 flex justify-center p-4 pt-5">
+<div class="bg-white/90 dark:bg-slate-900/90 p-4 rounded-lg shadow-xl text-center max-w-[280px]">
+<p class="text-xs uppercase tracking-widest font-bold mb-2">Дворец бракосочетания № 1</p>
+<a class="text-primary text-[10px] underline uppercase tracking-tighter font-bold" href="https://yandex.ru/maps/?text=%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3%2C%20%D0%90%D0%BD%D0%B3%D0%BB%D0%B8%D0%B9%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BD%D0%B0%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C%2028" rel="noopener noreferrer" target="_blank">Яндекс.Карты</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
+<div class="max-md:order-2">
+<h2 class="font-display text-5xl mb-6 italic">Фуршет и банкет</h2>
+<p class="text-slate-600 dark:text-slate-400 font-light text-lg mb-4 leading-relaxed">Петергоф лофт. Ленинградская область, Ломоносовский район, Низинское сельское поселение, посёлок Троицкая Гора, территория Троицкая Гора, 33.</p>
+<p class="text-slate-600 dark:text-slate-400 font-light text-base mb-4 leading-relaxed border-l-2 border-primary/40 pl-4">Гости могут остаться на второй день — уточните заранее, если планируете ночёвку или продлить визит.</p>
+<a class="text-primary text-xs font-bold uppercase tracking-widest underline hover:opacity-80" href="https://yandex.ru/maps/?text=%D0%BF%D0%BE%D1%81%D1%91%D0%BB%D0%BE%D0%BA%20%D0%A2%D1%80%D0%BE%D0%B8%D1%86%D0%BA%D0%B0%D1%8F%20%D0%93%D0%BE%D1%80%D0%B0%2033%20%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B3%D0%BE%D1%84%20%D0%BB%D0%BE%D1%84%D1%82" rel="noopener noreferrer" target="_blank">Открыть в Яндекс.Картах</a>
+</div>
+<div class="max-md:order-1 aspect-[4/3] bg-slate-200 dark:bg-slate-800 rounded-lg shadow-inner self-start w-full relative overflow-hidden">
+<img alt="" class="absolute inset-0 w-full h-full object-cover" src="images/peterhof-si-4030b.webp"/>
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-300/40 to-slate-400/30 dark:from-slate-700/50 dark:to-slate-800/60"></div>
+<div class="absolute inset-x-0 top-0 z-10 flex justify-center p-4 pt-5">
+<div class="bg-white/90 dark:bg-slate-900/90 p-4 rounded-lg shadow-xl text-center max-w-[280px]">
+<p class="text-xs uppercase tracking-widest font-bold text-primary mb-2">Петергоф лофт</p>
+<p class="text-sm text-slate-600 dark:text-slate-400 font-light mb-3">Троицкая Гора, 33</p>
+<a class="text-primary text-[10px] underline uppercase tracking-tighter font-bold" href="https://yandex.ru/maps/?text=%D0%BF%D0%BE%D1%81%D1%91%D0%BB%D0%BE%D0%BA%20%D0%A2%D1%80%D0%BE%D0%B8%D1%86%D0%BA%D0%B0%D1%8F%20%D0%93%D0%BE%D1%80%D0%B0%2033%20%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B3%D0%BE%D1%84%20%D0%BB%D0%BE%D1%84%D1%82" rel="noopener noreferrer" target="_blank">Яндекс.Карты</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-32 bg-slate-100 dark:bg-slate-900/50" id="rsvp">
+<div class="max-w-2xl mx-auto px-6 text-center">
+<h2 class="font-display text-5xl mb-4 italic">Будем рады видеть вас</h2>
+<p class="text-slate-500 font-light mb-12 uppercase tracking-[0.2em] text-sm">Пожалуйста, подтвердите участие до 20 июня 2026 г.</p>
+<form method="POST" action="https://script.google.com/macros/s/AKfycbzhGqtY4Twp8JkUNyk8WdsvnSYb00Qe-7CVCwpi-UwT66rgn9WKxUgWCZ_Kz7NJUScKVA/exec" class="space-y-6 text-left bg-white dark:bg-slate-900 p-8 md:p-12 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Имя</label>
+<input name="firstName" class="w-full bg-transparent border-0 border-b border-slate-200 dark:border-slate-700 focus:ring-0 focus:border-primary px-0 py-2 font-light italic" placeholder="напр. Елена" type="text" required/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Фамилия</label>
+<input name="lastName" class="w-full bg-transparent border-0 border-b border-slate-200 dark:border-slate-700 focus:ring-0 focus:border-primary px-0 py-2 font-light italic" placeholder="напр. Росси" type="text" required/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Сможете ли вы прийти?</label>
+<select name="attendance" class="w-full bg-transparent border-0 border-b border-slate-200 dark:border-slate-700 focus:ring-0 focus:border-primary px-0 py-2 font-light italic" required>
+<option value="Приду">С удовольствием приду</option>
+<option value="Не смогу">К сожалению, не смогу</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Аллергии и ограничения по еде</label>
+<input name="diet" class="w-full bg-transparent border-0 border-b border-slate-200 dark:border-slate-700 focus:ring-0 focus:border-primary px-0 py-2 font-light italic" placeholder="напр. Орехи, лактоза, без глютена" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Пожелания по музыке</label>
+<input name="music" class="w-full bg-transparent border-0 border-b border-slate-200 dark:border-slate-700 focus:ring-0 focus:border-primary px-0 py-2 font-light italic" placeholder="напр. Любимый трек или жанр" type="text"/>
+</div>
+<button class="w-full bg-primary text-background-dark py-4 rounded-lg text-xs font-bold uppercase tracking-[0.3em] mt-8 hover:brightness-110 transition-all" type="submit">
+                    Подтвердить участие
+                </button>
+</form>
+</div>
+</section>
+</main>
+<footer class="py-16 px-6 text-center bg-background-light dark:bg-background-dark border-t border-slate-100 dark:border-slate-800">
+<p class="font-display italic text-3xl mb-4">До встречи на свадьбе.</p>
+<div class="flex flex-col gap-2 items-center">
+<p class="text-[10px] text-slate-300 dark:text-slate-600 mt-8 tracking-widest">СДЕЛАНО С ЛЮБОВЬЮ ДЛЯ НАШИХ ДРУЗЕЙ И БЛИЗКИХ</p>
+</div>
+</footer>
+<script>
+(function () {
+  var end = new Date('2026-07-14T13:00:00+03:00').getTime();
+  var el = {
+    d: document.getElementById('countdown-days'),
+    h: document.getElementById('countdown-hours'),
+    m: document.getElementById('countdown-minutes'),
+    s: document.getElementById('countdown-seconds'),
+    label: document.getElementById('countdown-label')
+  };
+  function tick() {
+    var diff = end - Date.now();
+    if (diff <= 0) {
+      if (el.d) el.d.textContent = '0';
+      if (el.h) el.h.textContent = '00';
+      if (el.m) el.m.textContent = '00';
+      if (el.s) el.s.textContent = '00';
+      if (el.label) {
+        el.label.textContent = 'Этот день настал';
+        el.label.classList.add('countdown-done');
+      }
+      return;
+    }
+    var sec = Math.floor(diff / 1000);
+    var days = Math.floor(sec / 86400);
+    sec %= 86400;
+    var hours = Math.floor(sec / 3600);
+    sec %= 3600;
+    var mins = Math.floor(sec / 60);
+    sec %= 60;
+    if (el.d) el.d.textContent = String(days);
+    if (el.h) el.h.textContent = String(hours).padStart(2, '0');
+    if (el.m) el.m.textContent = String(mins).padStart(2, '0');
+    if (el.s) el.s.textContent = String(sec).padStart(2, '0');
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+</body></html>
