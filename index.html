@@ -35,6 +35,16 @@
             background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 45%, transparent 100%);
             pointer-events: none;
         }
+        .hero-parallax-img {
+            position: absolute;
+            left: 0;
+            top: -12%;
+            width: 100%;
+            height: 124%;
+            max-width: none;
+            object-fit: cover;
+            will-change: transform;
+        }
         #countdown-label {
             font-size: 18px;
             background: linear-gradient(180deg, #ecb613 0%, #a67c0a 100%);
@@ -51,9 +61,9 @@
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased selection:bg-primary/30">
 <main>
-<section class="relative h-[584px] w-full flex flex-col items-center justify-center overflow-hidden">
-<div class="absolute inset-0 z-0">
-<img class="w-full h-full object-cover grayscale-[20%] contrast-[1.1]" data-alt="Atmospheric wide shot of couple in Tuscany sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH7IlGsPfG8RuL3CykvPxb9RLHFx70TzTi42XpeoKwP_2Mz2nUr131bTUqB_YzFaENJJZZRBN0FAk_1snplBqiUozOFY931DH98qpBTuD_nvFXHFsLs12tbKEf6XXTviWcRO-pRfJv5ohWlIzGgkl3hh9HgnZdh-Wdzzd7-0RI6ApzKmW4h7nUrnM_3Iz6Xv0nywpQsbudgvTroiB3zUI72U862ddWh0hRZnKCk7TlZ2P4XYRmr0ewLt3gmK1DP46wYK17sEf37Hk"/>
+<section class="relative h-[684px] w-full flex flex-col items-center justify-center overflow-hidden" id="hero">
+<div class="absolute inset-0 z-0 overflow-hidden">
+<img id="hero-parallax-img" class="hero-parallax-img grayscale-[20%] contrast-[1.1]" data-alt="Atmospheric wide shot of couple in Tuscany sunset" src="images/1.webp"/>
 <div class="absolute inset-0 hero-gradient"></div>
 <div class="absolute inset-x-0 bottom-0 h-[45%] hero-bottom-fade z-[1]"></div>
 </div>
@@ -105,19 +115,18 @@
 <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
 <div class="md:col-span-5 relative">
 <div class="aspect-[3/4] overflow-hidden rounded-lg shadow-2xl">
-<img class="w-full h-full object-cover" data-alt="Close up of couple laughing in Paris cafe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG_XdCGnCXU__zDTUSx3NlV0yo1RmhkMpx7k4Wa7V1yqKbWI6uB9VlL0B-BQuv9Hnsh1grodVenYu0584mGI7FqVKx6XcSkub9QRtFtJ7R96BHjG7l2pKPQ77DE5drRGzFAyrCyMTBY4CjjSbhKSDcPZChrw8YTkUiV5USMXhpT4thcNSSECJ4zeP4d6OX0nSKh_5y1zD86SnRSN-gre3WzUEkBCPe3n5Rb0AIHACX7n6KyfBIGOlB3aPD328YWE0DD0ITcT3vM4k"/>
+<img class="w-full h-full object-cover" data-alt="Close up of couple laughing in Paris cafe" src="images/6.webp"/>
 </div>
 <div class="absolute -bottom-8 -right-8 w-48 h-64 hidden lg:block rounded-lg overflow-hidden border-8 border-background-light dark:border-background-dark shadow-xl">
-<img class="w-full h-full object-cover" data-alt="Black and white portrait of the couple" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyVQDs_GWvBWz_KMR0h6w46REkqizKesfXtJqYacsxgNh8GEOAFHPpTkLpwu4W6IYmVIPHBBUVS2IhWBr-6I78ivwnJyzgO0ptr_w6YTJ7bo4yCM7d9NJmOqwbSgUEreR8OJSWg3QHFgUdzgn2T7ziQgZgAecglL2n4KaZpJQECzFh-0XxcKvhu5djG-t74OeMqkkz5MOmf2ys3ocTLVkAYj2vwr5UV6wbbnRVitKK3VTiiT4nnk-fO21usgIRDGI8nsBFyQ44gtU"/>
+<img class="w-full h-full object-cover" data-alt="Black and white portrait of the couple" src="images/3.webp"/>
 </div>
 </div>
 <div class="md:col-span-7 md:pl-12">
-<span class="text-primary uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Начало истории</span>
-<h2 class="font-display text-5xl md:text-6xl mb-8 leading-tight italic">Ваш текст</h2>
+<h2 class="font-display text-5xl md:text-6xl mb-8 leading-tight italic">Начало истории</h2>
 <div class="space-y-6 text-slate-600 dark:text-slate-400 font-light leading-relaxed text-lg">
-<p>Мы познакомились в Петербурге — среди набережных, мостов и белых ночей. Город стал фоном нашей истории: прогулки по центру, кофе в любимых местах, долгие разговоры.</p>
-<p>Теперь хотим отметить этот день там же, рядом с вами — от росписи у Невы до вечера в Петергофе. Спасибо, что вы с нами.</p>
-<p class="font-display italic text-2xl text-slate-900 dark:text-slate-100 pt-4">«Мы счастливы начать нашу новую главу вместе с вами».</p>
+<p>Наша история началась с детских игр - беззаботных, шумных, простых. Но истинная мелодия любви зазвучала лишь в Санкт‑Петербурге: в ритме шагов по гранитным набережным, в шёпоте ветра над Невой, в мгновениях, когда взгляды встретились уже не по‑детски, а с трепетом и нежностью.</p>
+<p>Теперь хотим отметить этот день там же, рядом с вами — от росписи у Невы до вечера в Петергофе.</p>
+<p class="font-display italic text-2xl text-slate-900 dark:text-slate-100 pt-4">«Спасибо, что вы с нами».</p>
 </div>
 </div>
 </div>
@@ -167,7 +176,7 @@
 <img class="w-full h-full object-cover grayscale-[30%]" data-alt="Silk dress fabric texture" src="images/red.webp"/>
 </div>
 <div class="aspect-[4/5] overflow-hidden rounded-lg mt-12">
-<img class="w-full h-full object-cover grayscale-[30%]" data-alt="Classic suit detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCue8BgtHIgacOq4HbXDu-pBkqfvWBBGS8k5ve0VK4uSNO3XmXOSzmuy8N1uHGxqu4mLTFaUBn0a1jitfrol91oijYv3OKdD_x35GYds0AUDihblByKlbDN316IKSoNdk6vZvb2eGU_JmHbyQSo_kxn6uKyqXKP-h0M-tDK9Bohsa1-zKI-e-Xiek2aZh1QiDZwP-irN__hu37R2mFurIypXDbbzUDdcA2wlB4A-hjp5BkcRrmMzvUAGZD2YzJXsWYg8_R7kHwm_-8"/>
+<img class="w-full h-full object-cover grayscale-[30%]" data-alt="Classic suit detail" src="images/friends.webp"/>
 </div>
 </div>
 </div>
@@ -248,16 +257,16 @@
 <section class="py-24" id="gallery">
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
 <div class="aspect-[3/4] overflow-hidden rounded-lg">
-<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Beautiful wedding table setting in a garden" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9lRWPAOcNjVHEtppVlsGkmrRGMOcCB8sIxJmdeYORsfMqpiaAg273reTUBmAbGiyLWetRRwylvzM540_iTaler6Jm-LwxJE100_Hiu4IqbTBRuOnGrGN7D6kRJSE2Hs5iaMSU3kA7DNprucvIrkGWr6nK2Lv4idbgILMKPZwDf1Pf3jLvDtBYaHI2pBn9rcKYuCLzjjqUgy_TF-xH_ACiWqhuL2T3w3ug3I3raXbGV74Q3siqptsRG4_-zI6wbOOxTkWTqV8XVRU"/>
+<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Beautiful wedding table setting in a garden" src="images/peter-loft2.webp"/>
 </div>
 <div class="aspect-[3/4] overflow-hidden rounded-lg mt-8 md:mt-16">
-<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Couple walking away through a field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtZBYJHbw_dbE1wngpsHlbLIILbwYDR4ejLLngXVDnmDNksP22eWaP1r1xE3YFnIRGHzuqD_1yBlEh1uskpTpyvCD48ORyHcWclOAbMB7btBLp6-80_jgHgLmKcmaXU8aZDbog7tMcqXkPG1d7IvBEI-HlW9o04FkIy3Vlmv42PXBxrLqk8k5nNG-IJqrOpHWxr45ISuIJlgMQAFcxSJjmKNqgTodoVpcCIwDAgIa--B2-hisGiYZ8S_tlQjMvygyCuDW3KlhHjp0"/>
+<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Couple walking away through a field" src="images/5.webp"/>
 </div>
 <div class="aspect-[3/4] overflow-hidden rounded-lg">
-<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="A close up of two glasses clinking" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_wZZs-4ZfxDdngMftVuzzMSelm-YuFSD-If0iRe1l18Pfw-VOZAT6NzI5W8Lkzlveu0UTDjq2q6bHvtpGPMv6UwCRfmIs8iYo33IMh6oacFa_FbFYFrqn8CO9uTiAsUhH1hXHfVwj_clasEhNQOwgxjuSHiJ0yGQW3x_FeUWFh8pVBj-88sg2Q9hvrR0IlGHRJbLjIFI8iRa5oFYVjEk4K9Iabx3tdyJG5mC94SD--bEvW0lcBWO-ZL_LD5VTIeJ83PE7OY7yuiU"/>
+<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="A close up of two glasses clinking" src="images/7.webp"/>
 </div>
 <div class="aspect-[3/4] overflow-hidden rounded-lg mt-8 md:mt-16">
-<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Dreamy outdoor wedding venue at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwf1p3xV1DrQvF-Kk1h4Muy-KhsTtyZ9ECCf0NI6vsGvAXAsWKWT6BFL_ffx1C9HXEHHJj0eLxPEw4bo2Ks-eNsC6PC7E15Hy-Hn0gY9nBdHeaMLRmm0DwlnlzyKCD5QmBY3UYv5fIBp7oB_s7icltS__OEiGP8_7KgCFPYLLjG5BX2X-ZV8uoWtOy2-F_oSTsAAz2KH2kRFE8ZKu-ccW2Hj6a_OdWkw0UnrbrbRj8m7YG6E-9ZxBGqo0OokRTLtZCclVgUNZ8360"/>
+<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Dreamy outdoor wedding venue at night" src="images/peter-loft.webp"/>
 </div>
 </div>
 </section>
@@ -383,6 +392,31 @@
   }
   tick();
   setInterval(tick, 1000);
+})();
+(function () {
+  var mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (mq && mq.matches) return;
+  var hero = document.getElementById('hero');
+  var img = document.getElementById('hero-parallax-img');
+  if (!hero || !img) return;
+  var ticking = false;
+  function apply() {
+    ticking = false;
+    var y = -(window.scrollY || window.pageYOffset) * 0.28;
+    var max = Math.round(hero.offsetHeight * 0.14);
+    if (y < -max) y = -max;
+    if (y > max) y = max;
+    img.style.transform = 'translate3d(0,' + y + 'px,0)';
+  }
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(apply);
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  apply();
 })();
 </script>
 </body></html>
