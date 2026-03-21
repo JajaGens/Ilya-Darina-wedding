@@ -316,7 +316,7 @@
 <div class="max-w-2xl mx-auto px-6 text-center">
 <h2 class="font-display text-5xl mb-4 italic">Будем рады видеть вас</h2>
 <p class="text-slate-500 font-light mb-12 uppercase tracking-[0.2em] text-sm">Пожалуйста, подтвердите участие до 20 июня 2026 г.</p>
-<form method="POST" action="https://script.google.com/macros/s/AKfycbwZLS7tRm2NgRYY9Gdt-Xjp0Ykvr9gjYnurwYirh8xszsSvIPmBa6bLHcWEdjwpOnHu/exec" class="space-y-6 text-left bg-white dark:bg-slate-900 p-8 md:p-12 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800" target="gs-rsvp">
+<form id="rsvp-form" method="POST" action="https://script.google.com/macros/s/AKfycbwZLS7tRm2NgRYY9Gdt-Xjp0Ykvr9gjYnurwYirh8xszsSvIPmBa6bLHcWEdjwpOnHu/exec" class="space-y-6 text-left bg-white dark:bg-slate-900 p-8 md:p-12 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="space-y-2">
 <label class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Имя</label>
@@ -324,7 +324,7 @@
 </div>
 <div class="space-y-2">
 <label class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Фамилия</label>
-<input name="lastName" class="w-full bg-transparent border-0 border-b border-slate-200 dark:border-slate-700 focus:ring-0 focus:border-primary px-0 py-2 font-light italic" placeholder="напр. Росси" type="text" required/>
+<input name="lastName" class="w-full bg-transparent border-0 border-b border-slate-200 dark:border-slate-700 focus:ring-0 focus:border-primary px-0 py-2 font-light italic" placeholder="напр. Смирнова" type="text" required/>
 </div>
 </div>
 <div class="space-y-2">
@@ -342,11 +342,19 @@
 <label class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Пожелания по музыке</label>
 <input name="music" class="w-full bg-transparent border-0 border-b border-slate-200 dark:border-slate-700 focus:ring-0 focus:border-primary px-0 py-2 font-light italic" placeholder="напр. Любимый трек или жанр" type="text"/>
 </div>
-<button class="w-full bg-primary text-background-dark py-4 rounded-lg text-xs font-bold uppercase tracking-[0.3em] mt-8 hover:brightness-110 transition-all" type="submit">
+<button id="rsvp-submit" class="w-full bg-primary text-background-dark py-4 rounded-lg text-xs font-bold uppercase tracking-[0.3em] mt-8 hover:brightness-110 transition-all disabled:opacity-60 disabled:cursor-not-allowed" type="submit">
                     Подтвердить участие
                 </button>
 </form>
-<iframe name="gs-rsvp" title="Отправка формы" hidden></iframe>
+<div id="rsvp-success-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-6" aria-hidden="true" role="dialog" aria-labelledby="rsvp-modal-title" aria-modal="true">
+<div class="absolute inset-0 bg-background-dark/65 backdrop-blur-[2px]" data-rsvp-modal-close tabindex="-1"></div>
+<div class="relative bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-2xl max-w-md w-full p-10 md:p-12 text-center">
+<span class="material-symbols-outlined text-primary text-5xl font-light mb-4 block" aria-hidden="true">favorite</span>
+<h3 id="rsvp-modal-title" class="font-display text-3xl md:text-4xl italic text-slate-900 dark:text-slate-100 mb-3">Спасибо!</h3>
+<p class="text-slate-500 dark:text-slate-400 font-light text-sm leading-relaxed mb-10">Мы сохранили ваш ответ. До встречи на празднике.</p>
+<button type="button" class="w-full bg-primary text-background-dark py-4 rounded-lg text-xs font-bold uppercase tracking-[0.3em] hover:brightness-110 transition-all" data-rsvp-modal-close>Закрыть</button>
+</div>
+</div>
 </div>
 </section>
 </main>
@@ -418,6 +426,62 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   apply();
+})();
+(function () {
+  var form = document.getElementById('rsvp-form');
+  var modal = document.getElementById('rsvp-success-modal');
+  var submitBtn = document.getElementById('rsvp-submit');
+  if (!form || !modal || !submitBtn) return;
+  var labelDefault = submitBtn.textContent.replace(/\s+/g, ' ').trim();
+  function openModal() {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    var focusEl = modal.querySelector('[data-rsvp-modal-close]');
+    if (focusEl) focusEl.focus();
+  }
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  modal.addEventListener('click', function (e) {
+    if (e.target.closest('[data-rsvp-modal-close]')) closeModal();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    var action = form.getAttribute('action');
+    if (!action) return;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправка…';
+    var body = new URLSearchParams(new FormData(form));
+    fetch(action, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: body
+    })
+      .then(function () {
+        form.reset();
+        openModal();
+      })
+      .catch(function () {
+        alert('Не удалось отправить. Проверьте соединение и попробуйте ещё раз.');
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = labelDefault;
+      });
+  });
 })();
 </script>
 </body></html>
